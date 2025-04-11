@@ -311,7 +311,8 @@ const styles = StyleSheet.create({
     marginLeft: 8
   },
   orText: {
-    marginVertical: 10,
+    marginTop: 15,
+    marginBottom: 15,
     color: '#666'
   },
   instructionContainer: {
