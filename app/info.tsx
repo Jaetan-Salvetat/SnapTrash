@@ -1,27 +1,15 @@
 import React from 'react'
-import { StyleSheet, ScrollView, View, TouchableOpacity } from 'react-native'
-import { router } from 'expo-router'
-import AntDesign from '@expo/vector-icons/AntDesign'
+import { StyleSheet, ScrollView, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
+import TopAppBar from '@/components/TopAppBar'
 
 export default function InfoScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ThemedView style={styles.container}>
-        <ThemedView style={styles.appBar}>
-          <TouchableOpacity 
-            style={styles.appBarBackButton} 
-            onPress={() => router.back()}
-          >
-            <AntDesign name="left" size={22} color="#4CAF50" />
-          </TouchableOpacity>
-          
-          <ThemedText style={styles.appBarTitle}>SnapTrash - Informations</ThemedText>
-          
-          <View style={styles.appBarButtonPlaceholder} />
-        </ThemedView>
+        <TopAppBar title="SnapTrash - Informations" />
         
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
           <ThemedText type="title" style={styles.title}>
@@ -113,40 +101,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF'
   },
-  appBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E8F5E9'
-  },
-  appBarTitle: {
-    color: '#4CAF50',
-    fontSize: 22,
-    fontWeight: 'bold',
-    flex: 1,
-    textAlign: 'center'
-  },
-  appBarBackButton: {
-    padding: 10,
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E8F5E9',
-    borderRadius: 22
-  },
-  appBarButtonPlaceholder: {
-    width: 40
-  },
+
   scrollView: {
     flex: 1,
     padding: 20,
@@ -190,7 +145,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#E8F5E9',
     padding: 12,
-    borderRadius: 8
+    borderRadius: 8,
+    overflow: 'hidden'
   },
   colorIndicator: {
     width: 24,
@@ -198,7 +154,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginRight: 12,
     borderWidth: 2,
-    borderColor: '#FFFFFF'
+    borderColor: 'rgba(255, 255, 255, 0.5)',
+    elevation: 1,
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.2,
+    shadowRadius: 1
   },
   wasteTypeInfo: {
     flex: 1

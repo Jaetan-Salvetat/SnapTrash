@@ -5,6 +5,7 @@ import AntDesign from '@expo/vector-icons/AntDesign'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ThemedText } from '@/components/ThemedText'
 import { ThemedView } from '@/components/ThemedView'
+import TopAppBar from '@/components/TopAppBar'
 
 type WasteInfo = {
   identification: {
@@ -42,16 +43,7 @@ export default function WasteDetailsScreen() {
     return (
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.container}>
-          <ThemedView style={styles.appBar}>
-            <TouchableOpacity 
-              style={styles.appBarBackButton} 
-              onPress={() => router.back()}
-            >
-              <AntDesign name="left" size={22} color="#4CAF50" />
-            </TouchableOpacity>
-            <ThemedText style={styles.appBarTitle}>SnapTrash - Aucun résultat</ThemedText>
-            <View style={styles.appBarButtonPlaceholder} />
-          </ThemedView>
+          <TopAppBar title="SnapTrash - Aucun résultat" />
           <ThemedView style={styles.noResultsContainer}>
             <ThemedText style={styles.noResultsText}>Aucune information disponible</ThemedText>
             <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
@@ -69,16 +61,7 @@ export default function WasteDetailsScreen() {
     return (
       <SafeAreaView style={styles.safeArea}>
         <ThemedView style={styles.container}>
-          <ThemedView style={styles.appBar}>
-            <TouchableOpacity 
-              style={styles.appBarBackButton} 
-              onPress={() => router.back()}
-            >
-              <AntDesign name="left" size={22} color="#4CAF50" />
-            </TouchableOpacity>
-            <ThemedText style={styles.appBarTitle}>SnapTrash - Erreur</ThemedText>
-            <View style={styles.appBarButtonPlaceholder} />
-          </ThemedView>
+          <TopAppBar title="SnapTrash - Erreur" />
           <ThemedView style={styles.errorContainer}>
             <AntDesign name="exclamationcircleo" size={50} color="#E53935" />
             <ThemedText style={styles.errorTitle}>
@@ -130,33 +113,21 @@ export default function WasteDetailsScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ThemedView style={styles.container}>
-        <ThemedView style={styles.appBar}>
-          <TouchableOpacity 
-            style={styles.appBarBackButton} 
-            onPress={() => router.back()}
-          >
-            <AntDesign name="arrowleft" size={22} color="#4CAF50" />
-          </TouchableOpacity>
-          
-          <ThemedText style={styles.appBarTitle}>Détails du déchet</ThemedText>
-          
-          <View style={styles.appBarActions}>
-            <TouchableOpacity 
-              style={styles.appBarButton}
-              onPress={goToHome}
-            >
-              <AntDesign name="home" size={22} color="#4CAF50" />
-            </TouchableOpacity>
-            
-            <TouchableOpacity 
-              style={styles.appBarButton}
-              onPress={goToInfo}
-            >
-              <AntDesign name="infocirlceo" size={22} color="#4CAF50" />
-            </TouchableOpacity>
-          </View>
-        </ThemedView>
-      
+        <TopAppBar 
+          title={wasteInfo.identification.nom}
+          actions={
+            <View style={styles.appBarActions}>
+              <TouchableOpacity onPress={goToHome}>
+                <AntDesign name="home" size={22} color="#4CAF50" />
+              </TouchableOpacity>
+              
+              <TouchableOpacity style={styles.appBarButton} onPress={goToInfo}>
+                <AntDesign name="infocirlceo" size={22} color="#4CAF50" />
+              </TouchableOpacity>
+            </View>
+          }
+        />
+        
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
           <ThemedView style={styles.header}>
             <View style={styles.wasteBadge}>
@@ -272,8 +243,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
-    paddingBottom: 20
+    backgroundColor: '#FFFFFF'
   },
   errorContainer: {
     flex: 1,
@@ -317,7 +287,8 @@ const styles = StyleSheet.create({
     fontWeight: '500'
   },
   scrollView: {
-    flex: 1
+    flex: 1,
+    marginTop: 10
   },
   header: {
     alignItems: 'center',
@@ -540,28 +511,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
-  appBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E8F5E9'
-  },
-  appBarTitle: {
-    color: '#4CAF50',
-    fontSize: 20,
-    fontWeight: 'bold',
-    flex: 1,
-    textAlign: 'center'
-  },
   appBarActions: {
     flexDirection: 'row',
     alignItems: 'center'
@@ -572,18 +521,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8
-  },
-  appBarBackButton: {
-    padding: 10,
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E8F5E9',
-    borderRadius: 22
-  },
-  appBarButtonPlaceholder: {
-    width: 40
   },
   bottomPadding: {
     height: 30
